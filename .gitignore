@@ -27,9 +27,9 @@ scaler.save
 *.onnx
 
 # Data files (if they're large or sensitive)
-*.csv
-*.xlsx
-*.json
+#*.csv
+#*.xlsx
+#*.json
 # Uncomment the line above if you want to ignore all JSON files
 # Otherwise, keep your config JSONs tracked
 
@@ -65,8 +65,8 @@ Thumbs.db
 .DS_Store
 
 # Synthetic data (if you regenerate it)
-pyapi/synthetic_mental_wellness_data.csv
+#pyapi/synthetic_mental_wellness_data.csv
 
 # Model predictions/outputs
-pyapi/predictions_vs_actual.png
-pyapi/ScreenTime vs MentalWellnessScore.png
+#pyapi/predictions_vs_actual.png
+#pyapi/ScreenTime vs MentalWellnessScore.png
