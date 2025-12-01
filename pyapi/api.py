@@ -8,7 +8,7 @@ app = FastAPI(title="Mental Wellness Predictor")
 
 # ----- CORS setup -----
 # Allow requests from any origin
-app.add_middleware(
+app.add_middleware( 
     CORSMiddleware,
     allow_origins=["*"],  # allows all origins
     allow_credentials=True,
