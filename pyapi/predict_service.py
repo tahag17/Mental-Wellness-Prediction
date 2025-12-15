@@ -7,7 +7,7 @@ import numpy as np
 
 # Load trained model, scaler, and metadata
 model = load_model("mental_wellness_model.keras")
-scaler = joblib.load("scaler.save")
+scaler = joblib.load("scaler.joblib")
 
 with open("columns.json", "r") as f:
     info = json.load(f)
@@ -24,8 +24,8 @@ def predict_new_user(new_user_dict):
     new_user_df = pd.get_dummies(new_user_df, columns=cat_cols, drop_first=True)
 
     # Feature engineering
-    new_user_df['work_leisure_screen_ratio'] = new_user_df['work_screen_hours'] / (new_user_df['leisure_screen_hours'] + 1e-5)
-    new_user_df['total_screen_hours'] = new_user_df['work_screen_hours'] + new_user_df['leisure_screen_hours']
+    # new_user_df['work_leisure_screen_ratio'] = new_user_df['work_screen_hours'] / (new_user_df['leisure_screen_hours'] + 1e-5)
+    # new_user_df['total_screen_hours'] = new_user_df['work_screen_hours'] + new_user_df['leisure_screen_hours']
 
     # Add missing columns
     for col in X_columns:
@@ -35,8 +35,9 @@ def predict_new_user(new_user_dict):
     new_user_df = new_user_df[X_columns]
 
     # Scale numerical features
-    scaler_cols = num_cols + ['work_leisure_screen_ratio', 'total_screen_hours']
-    new_user_df[scaler_cols] = scaler.transform(new_user_df[scaler_cols])
+    # scaler_cols = num_cols + ['work_leisure_screen_ratio', 'total_screen_hours']
+    # new_user_df[scaler_cols] = scaler.transform(new_user_df[scaler_cols])
+    new_user_df[num_cols] = scaler.transform(new_user_df[num_cols])
 
     # Predict and clamp
     prediction = model.predict(new_user_df)[0][0]
