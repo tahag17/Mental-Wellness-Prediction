@@ -15,7 +15,7 @@ export class App {
 
   predictionResult: number | null = null;
 
-  onPrediction(result: number) {
+  onPrediction(result: number | null) {
     this.predictionResult = result;
   }
 }
