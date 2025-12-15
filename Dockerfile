@@ -4,16 +4,16 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy requirements first for caching
-COPY pyapi/requirements.txt .
+COPY requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all code
-COPY pyapi/ ./pyapi/
+COPY . .
 
 # Expose port
 EXPOSE 8080
 
 # Run app
-CMD ["python", "pyapi/main.py"]
+CMD ["python", "-m", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8080"]
