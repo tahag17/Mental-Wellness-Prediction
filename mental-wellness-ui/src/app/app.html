@@ -1,1 +1,4 @@
-<app-predict-form></app-predict-form> <router-outlet></router-outlet>
+<app-predict-header></app-predict-header>
+<app-predict-form (predictionMade)="onPrediction($event)"></app-predict-form>
+<app-predict-footer [result]="predictionResult"></app-predict-footer>
+<router-outlet></router-outlet>

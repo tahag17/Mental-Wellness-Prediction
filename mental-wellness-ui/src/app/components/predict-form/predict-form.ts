@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Predict } from '../../services/predict';
@@ -11,6 +11,8 @@ import { Predict } from '../../services/predict';
   styleUrls: ['./predict-form.scss'],
 })
 export class PredictForm {
+  @Output() predictionMade: EventEmitter<number | null> = new EventEmitter<number | null>();
+
   wellnessForm: FormGroup;
 
   occupations = ['Employed', 'Student', 'Self-employed', 'Unemployed', 'Retired'];
@@ -23,23 +25,23 @@ export class PredictForm {
 
   constructor(private fb: FormBuilder, private predictService: Predict) {
     this.wellnessForm = this.fb.group({
-      age: [null, Validators.required],
-      gender: ['', Validators.required],
-      occupation: ['', Validators.required],
-      work_mode: ['', Validators.required],
+      age: [30, Validators.required], // default: 30 years old
+      gender: ['Male', Validators.required],
+      occupation: ['Employed', Validators.required],
+      work_mode: ['Remote', Validators.required],
 
-      screen_time_hours: [null, Validators.required],
-      work_screen_hours: [null, Validators.required],
-      leisure_screen_hours: [null, Validators.required],
+      screen_time_hours: [6, Validators.required],
+      work_screen_hours: [4, Validators.required],
+      leisure_screen_hours: [2, Validators.required],
 
-      sleep_hours: [null, Validators.required],
-      sleep_quality_1_5: [null, [Validators.required, Validators.min(1), Validators.max(5)]],
+      sleep_hours: [7, Validators.required],
+      sleep_quality_1_5: [4, [Validators.required, Validators.min(1), Validators.max(5)]],
 
-      stress_level_0_10: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
-      productivity_0_100: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      stress_level_0_10: [5, [Validators.required, Validators.min(0), Validators.max(10)]],
+      productivity_0_100: [80, [Validators.required, Validators.min(0), Validators.max(100)]],
 
-      exercise_minutes_per_week: [null, Validators.required],
-      social_hours_per_week: [null, Validators.required],
+      exercise_minutes_per_week: [150, Validators.required],
+      social_hours_per_week: [10, Validators.required],
     });
   }
 
@@ -55,6 +57,7 @@ export class PredictForm {
     this.predictService.predict(payload).subscribe({
       next: (res) => {
         this.result = res.mental_wellness_index;
+        this.predictionMade.emit(this.result); // <-- emit result to parent
         this.loading = false;
       },
       error: () => {

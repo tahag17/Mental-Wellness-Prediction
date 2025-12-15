@@ -1,0 +1,46 @@
+<ng-container *ngIf="result !== null">
+  <div class="footer-container">
+    <h3 class="footer-title">Votre Résultat de Bien‑Être Mental</h3>
+
+    <div class="score-box" [ngClass]="colorClass">
+      Score: <strong>{{ result | number : '1.0-0' }}</strong
+      >/100
+    </div>
+
+    <div class="interpretation">
+      <p><strong>Interprétation :</strong> {{ interpretation }}</p>
+      <p>
+        Basé sur des interprétations courantes du
+        <a
+          href="https://us.psytoolkit.org/survey-library/who5.html?utm_source=chatgpt.com"
+          target="_blank"
+        >
+          WHO‑5 Well‑Being Index
+        </a>
+        et d’outils similaires.
+      </p>
+    </div>
+
+    <div class="ranges">
+      <h4>Ranges de référence :</h4>
+      <ul>
+        <li>
+          <strong>0–50</strong> → Bien‑être faible (stress élevé / risque de détresse psychologique)
+        </li>
+        <li><strong>51–75</strong> → Bien‑être modéré (fonctionnement raisonnable)</li>
+        <li><strong>76–100</strong> → Bien‑être élevé (santé mentale positive)</li>
+      </ul>
+
+      <p class="sources">
+        Sources :
+        <a
+          href="https://us.psytoolkit.org/survey-library/who5.html?utm_source=chatgpt.com"
+          target="_blank"
+          >us.psytoolkit.org</a
+        >,
+        <a href="https://www.unicef.org/reports/mental-health-wellbeing" target="_blank">UNICEF</a>,
+        <a href="https://www.inspq.qc.ca" target="_blank">INSPQ</a>
+      </p>
+    </div>
+  </div>
+</ng-container>
