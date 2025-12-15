@@ -6,11 +6,16 @@ import json
 import numpy as np
 
 # Load trained model, scaler, and metadata
-model = load_model("mental_wellness_model.keras")
-scaler = joblib.load("scaler.joblib")
+import os
 
-with open("columns.json", "r") as f:
+BASE_DIR = os.path.dirname(__file__)
+
+model = load_model(os.path.join(BASE_DIR, "mental_wellness_model.keras"))
+scaler = joblib.load(os.path.join(BASE_DIR, "scaler.joblib"))
+
+with open(os.path.join(BASE_DIR, "columns.json"), "r") as f:
     info = json.load(f)
+
 
 X_columns = info["X_columns"]
 num_cols = info["num_cols"]

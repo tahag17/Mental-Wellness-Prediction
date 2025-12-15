@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-from predict_service import predict_new_user
+from pyapi.predict_service import predict_new_user
 
 app = FastAPI(title="Mental Wellness Predictor")
 

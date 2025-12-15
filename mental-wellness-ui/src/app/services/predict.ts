@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class Predict {
   private apiUrl =
     // 'https://mental-wellness-prediction-using-artificial-neur-production.up.railway.app/predict';
-    'https://projet.fly.dev/predict';
+    'https://mental-wellness-prediction.fly.dev/predict';
 
   constructor(private http: HttpClient) {}
 
