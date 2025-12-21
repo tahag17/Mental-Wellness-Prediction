@@ -9,7 +9,7 @@ export class Predict {
   private apiUrl =
     // 'https://mental-wellness-prediction-using-artificial-neur-production.up.railway.app/predict';
     // 'https://mental-wellness-prediction.fly.dev/predict';
-    'https://mental-wellness-predictor-production.up.railway.app/';
+    'https://mental-wellness-predictor-production.up.railway.app/predict';
 
   constructor(private http: HttpClient) {}
 
